@@ -125,8 +125,49 @@ VALUES
 
 -- 3-2. 新增：承1，為三名教練新增專長資料至 `COACH_LINK_SKILL` ，資料需求如下：
     -- 1. 所有教練都有 `重訓` 專長
+INSERT INTO
+  "COACH_LINK_SKILL" (coach_id, skill_id)
+VALUES
+  ((SELECT ID FROM "COACH" WHERE user_id =
+    (SELECT ID FROM "USER" WHERE email = 'lee2000@hexschooltest.io')
+    ),
+    (SELECT ID FROM "SKILL" WHERE name = '重訓')
+  ),
+  ((SELECT ID FROM "COACH" WHERE user_id = 
+    (SELECT ID FROM "USER" WHERE email = 'muscle@hexschooltest.io')
+    ),
+    (SELECT ID FROM "SKILL" WHERE name = '重訓')
+  ),
+  ((SELECT ID FROM "COACH" WHERE user_id = 
+    (SELECT ID FROM "USER" WHERE email = 'starplatinum@hexschooltest.io')
+    ),
+    (SELECT ID FROM "SKILL" WHERE name = '重訓')
+  );
+
     -- 2. 教練`肌肉棒子` 需要有 `瑜伽` 專長
+INSERT INTO
+  "COACH_LINK_SKILL" (coach_id, skill_id)
+VALUES
+  ((SELECT ID FROM "COACH" WHERE user_id = 
+    (SELECT ID FROM "USER" WHERE email = 'muscle@hexschooltest.io')
+    ),
+    (SELECT ID FROM "SKILL" WHERE name = '瑜伽')
+  );
+
     -- 3. 教練`Q太郎` 需要有 `有氧運動` 與 `復健訓練` 專長
+INSERT INTO
+  "COACH_LINK_SKILL" (coach_id, skill_id)
+VALUES
+  ((SELECT ID FROM "COACH" WHERE user_id = 
+    (SELECT ID FROM "USER" WHERE email = 'starplatinum@hexschooltest.io')
+    ),
+    (SELECT ID FROM "SKILL" WHERE name = '有氧運動')
+  ),
+   ((SELECT ID FROM "COACH" WHERE user_id = 
+    (SELECT ID FROM "USER" WHERE email = 'starplatinum@hexschooltest.io')
+    ),
+    (SELECT ID FROM "SKILL" WHERE name = '復健訓練')
+  );
 
 -- 3-3 修改：更新教練的經驗年數，資料需求如下：
     -- 1. 教練`肌肉棒子` 的經驗年數為3年
